@@ -15,9 +15,8 @@ public class FireworkEntity : MonoBehaviour
     public float upLong;
     public bool isMoving;
 
-    public void Ctor()//改
+    public void Ctor()
     {
-        prefab = Resources.Load<GameObject>("Resource_Runtime/Entity/Entity_Firework");
         material = new Material(Shader.Find("Unlit/Color"));
     }
 
@@ -38,9 +37,9 @@ public class FireworkEntity : MonoBehaviour
         size = Mathf.Lerp(0.2f, 0.05f, (position.y / screenHeight));
     }
 
-    public void disappear()
+    public void Disappear()
     {
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 
     /*public void CreateFirework(Transform parent)

@@ -4,15 +4,17 @@ using UnityEngine;
 
 public static class FireworkDomain
 {
-    public static int id = 1;
-
-    public static void CreateFirework(FireworkEntity fw, Transform parent)
+    public static FireworkEntity Spawn(GameContext ctx, Transform parent)
     {
-        fw.id = id;
-        id++;
+        FireworkEntity entity = GameFactory.CreateFirework(ctx, parent);
+        ctx.fireworkRepository.Add(entity);
 
-        fw.SetColor();
-        fw.SetPosition();
-        fw.SetSize();
+        return entity;
+    }
+
+    public static void UnSpawn(GameContext ctx, FireworkEntity entity)
+    {
+        ctx.fireworkRepository.Remove(entity);
+        entity.Disappear();
     }
 }

@@ -16,9 +16,8 @@ public class Main : MonoBehaviour
         if(Input.anyKeyDown)
         {
             GameObject fw = new GameObject("fw");
-            FireworkEntity firework = fw.AddComponent<FireworkEntity>();
             Transform parent = fw.transform;
-            FireworkDomain.CreateFirework(firework, parent);
+            FireworkDomain.Spawn(ctx, parent);
         }
     }
 }

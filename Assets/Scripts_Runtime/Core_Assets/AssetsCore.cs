@@ -15,20 +15,19 @@ public class AssetsCore//完全不熟悉这些语法
         entities = new Dictionary<string, GameObject>();
     }
 
-    public async Task LoadAll()
+    public async Task<GameObject> LoadFirework()
     {
-        AssetLabelReference labelReference = new AssetLabelReference();
+        var handle = Addressables.LoadAssetAsync<GameObject>("Entity_Firework");
 
-        labelReference.labelString = "Entity";
-        var handle = Addressables.LoadAssetsAsync<GameObject>(labelReference, null);
+        await handle.Task; // 等待加载完成
 
-        var all = await handle.Task;
-        foreach(var item in all)
+        if (handle.Status == AsyncOperationStatus.Succeeded)
         {
-            entities.Add(item.name, item);
+            return handle.Result; // 返回加载的 prefab
         }
 
-        entitiesHandle = handle;
+        Debug.LogError($"Failed to load prefab at address");
+        return null;
     }
 
     public void UnLoadAll()
