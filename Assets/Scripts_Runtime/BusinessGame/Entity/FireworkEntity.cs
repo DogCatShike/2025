@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -37,7 +38,12 @@ public class FireworkEntity : MonoBehaviour
         size = Mathf.Lerp(0.2f, 0.05f, (position.y / screenHeight));
     }
 
-    public void CreateFirework(Transform parent)
+    public void disappear()
+    {
+        Destroy(this.gameObject);
+    }
+
+    /*public void CreateFirework(Transform parent)
     {
         GameObject firework = Instantiate(prefab, parent);
         firework.name = "firework";
@@ -52,5 +58,5 @@ public class FireworkEntity : MonoBehaviour
 
         Rigidbody rb = firework.AddComponent<Rigidbody>();
         rb.useGravity = false;
-    }
+    }*/
 }

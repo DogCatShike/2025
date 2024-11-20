@@ -14,7 +14,5 @@ public static class FireworkDomain
         fw.SetColor();
         fw.SetPosition();
         fw.SetSize();
-
-        fw.CreateFirework(parent);
     }
 }

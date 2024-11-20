@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6520329873413732256}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Entity_Firework
-  m_TagString: Untagged
+  m_TagString: Entity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4355521487805155310}
   - component: {fileID: 4320842835028958701}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 9-Sliced
   m_TagString: Untagged
   m_Icon: {fileID: 0}
