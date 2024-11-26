@@ -4,9 +4,14 @@ using UnityEngine;
 
 public static class FireworkDomain
 {
-    public static FireworkEntity Spawn(GameContext ctx, Transform parent)
+    public static FireworkEntity Spawn(GameContext ctx)
     {
-        FireworkEntity entity = GameFactory.CreateFirework(ctx, parent);
+        GameObject fw = new GameObject("fw");
+
+        FireworkEntity entity = GameFactory.CreateFirework(ctx, fw.transform);
+
+        entity.SetParent(fw);
+
         ctx.fireworkRepository.Add(entity);
 
         return entity;

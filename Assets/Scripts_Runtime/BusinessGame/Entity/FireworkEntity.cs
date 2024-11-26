@@ -14,6 +14,7 @@ public class FireworkEntity : MonoBehaviour
     public float size;
     public float upLong;
     public bool isMoving;
+    private GameObject parent;
 
     public void Ctor()
     {
@@ -39,7 +40,15 @@ public class FireworkEntity : MonoBehaviour
 
     public void Disappear()
     {
+        Destroy(parent);
+        parent = null;
         Destroy(gameObject);
+    }
+
+    public void SetParent(GameObject newParent)
+    {
+        parent = newParent;
+        transform.parent = newParent.transform;
     }
 
     /*public void CreateFirework(Transform parent)

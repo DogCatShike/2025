@@ -15,9 +15,7 @@ public class Main : MonoBehaviour
     {
         if(Input.anyKeyDown)
         {
-            GameObject fw = new GameObject("fw");
-            Transform parent = fw.transform;
-            FireworkDomain.Spawn(ctx, parent);
+            FireworkDomain.Spawn(ctx);
         }
     }
 }
