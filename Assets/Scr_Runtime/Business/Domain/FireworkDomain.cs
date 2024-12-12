@@ -8,7 +8,6 @@ public static class FireworkDomain
     {
         FireworkEntity entity = GameFactory.Firework_Create(ctx, typeID, parent);
         ctx.fireworkRepository.Add(entity);
-        Debug.Log("Firework Spawn: " + entity.name);
         return entity;
     }
 }
