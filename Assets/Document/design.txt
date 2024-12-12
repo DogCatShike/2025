@@ -1,0 +1,10 @@
+Firework:
+    id
+    typeID
+    位置 pos
+    大小 size
+    颜色 color
+
+Tile:
+    id
+    typeID

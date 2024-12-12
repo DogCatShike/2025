@@ -17,10 +17,11 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 5abb68af181597d499ab400cc1c7c4fe
   m_SerializeEntries:
-  - m_GUID: e805e3a9a1ebf2d4b9daed35e8272361
+  - m_GUID: d625406f8c33db140a149684fc9df345
     m_Address: Entity_Firework
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Entity
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 1f3cc43fbeac9d64ab2f9b029e2ee8a0, type: 2}
