@@ -10,6 +10,10 @@ public static class GameFactory
         go = GameObject.Instantiate(go, parent);
 
         FireworkEntity entity = go.GetComponent<FireworkEntity>();
+
+        entity.idSig.entityType = EntityType.Firework;
+        entity.idSig.entityID = ctx.idService.fireworkID++;
+
         entity.Ctor();
         return entity;
     }

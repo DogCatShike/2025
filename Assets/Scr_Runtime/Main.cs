@@ -19,7 +19,7 @@ namespace HNY
         {
             if(Input.GetKeyDown(KeyCode.Space))
             {
-                Transform parent = new GameObject().transform;
+                Transform parent = new GameObject("f").transform;
                 GameBusiness.Enter(ctx, parent);
             }
         }

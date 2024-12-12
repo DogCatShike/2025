@@ -4,6 +4,8 @@ using HNY;
 
 public class GameContext
 {
+    public IDService idService;
+
     //core
     public AssetsCore assetsCore;
 
@@ -12,6 +14,8 @@ public class GameContext
 
     public GameContext()
     {
+        idService = new IDService();
+
         assetsCore = new AssetsCore();
 
         fireworkRepository = new FireworkRepository();

@@ -4,7 +4,7 @@ using HNY;
 
 public class FireworkEntity : MonoBehaviour
 {
-    public int id;
+    public IDSignature idSig;
     public int typeID;
 
     [HideInInspector]public Vector3 pos;

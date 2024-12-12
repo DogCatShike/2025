@@ -39,10 +39,6 @@ public class AssetsCore
     public GameObject Entity_GetFirework()
     {
         entities.TryGetValue("Entity_Firework", out GameObject entity);
-        if (entity == null) 
-        {
-            Debug.LogError("Entity_Firework is null");
-        }
         return entity;
     }
 }

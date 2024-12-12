@@ -5,23 +5,23 @@ using System.Collections.Generic;
 
 public class FireworkRepository
 {
-    Dictionary<int, FireworkEntity> all;
+    Dictionary<IDSignature, FireworkEntity> all;
     FireworkEntity[] temArray;
 
     public FireworkRepository()
     {
-        all = new Dictionary<int, FireworkEntity>();
+        all = new Dictionary<IDSignature, FireworkEntity>();
         temArray = new FireworkEntity[1000];
     }
 
     public void Add(FireworkEntity entity)
     {
-        all.Add(entity.id, entity);
+        all.Add(entity.idSig, entity);
     }
 
     public void Remove(FireworkEntity entity)
     {
-        all.Remove(entity.id);
+        all.Remove(entity.idSig);
     }
 
     //TODO
