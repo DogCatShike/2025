@@ -10,4 +10,9 @@ public static class FireworkDomain
         ctx.fireworkRepository.Add(entity);
         return entity;
     }
+
+    public static void Move(FireworkEntity firework)
+    {
+        firework.Move();
+    }
 }

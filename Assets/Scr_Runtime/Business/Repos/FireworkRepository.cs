@@ -24,5 +24,17 @@ public class FireworkRepository
         all.Remove(entity.idSig);
     }
 
+    public int TakeAll(out FireworkEntity[] array)
+    {
+            if (all.Count > temArray.Length)
+            {
+                temArray = new FireworkEntity[all.Count * 2];
+            }
+            all.Values.CopyTo(temArray, 0);
+
+            array = temArray;
+            return all.Count;
+    }
+    
     //TODO
 }

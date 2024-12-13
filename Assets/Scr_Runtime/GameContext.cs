@@ -8,6 +8,7 @@ public class GameContext
 
     //core
     public AssetsCore assetsCore;
+    public InputCore inputCore;
 
     //repos
     public FireworkRepository fireworkRepository;
@@ -17,6 +18,7 @@ public class GameContext
         idService = new IDService();
 
         assetsCore = new AssetsCore();
+        inputCore = new InputCore();
 
         fireworkRepository = new FireworkRepository();
     }
