@@ -13,13 +13,12 @@ public class FireworkEntity : MonoBehaviour
     [HideInInspector]public Color color;
     [HideInInspector]public float size;
     
+    public Vector3 beforePos;
     public float moveSpeed;
     public bool isMoving;
 
     public void Ctor()
     {
-        isMoving = true;
-
         SetPos();
         SetColor();
         SetSize();
@@ -58,14 +57,22 @@ public class FireworkEntity : MonoBehaviour
 
     public void Move()
     {
-        Vector3 beforePos = transform.position;
+        isMoving = true;
 
-        if(isMoving)
-        {
-            Vector2 pos = rb.velocity;
-            pos.y = moveSpeed;
-            rb.velocity = pos;
-        }
+        beforePos = transform.position;
+            
+        Vector2 pos = rb.velocity;
+        pos.y = moveSpeed;
+        rb.velocity = pos;
+
+        Invoke("Stop", 2);
+    }
+
+    public void Stop()
+    {
+        isMoving = false;
+
+        rb.velocity = Vector2.zero;
     }
 
     public void TearDown()
