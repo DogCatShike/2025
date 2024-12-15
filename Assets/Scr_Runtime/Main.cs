@@ -21,19 +21,11 @@ namespace HNY
 
             if(isKey)
             {
-                //parent没地方存
-                //放其他里面不合适，在想要不要新建个Entity，顺便把移动放parent？就不用一直传递transform了
-                //下回改，好懒
-                Transform parent = new GameObject("f").transform;
-                GameBusiness.Enter(ctx, parent);
-                int fireworkLen = ctx.fireworkRepository.TakeAll(out FireworkEntity[] fireworks);
+                GameBusiness.Enter(ctx);
+                
+                int parentLen = ctx.parentRepository.TakeAll(out ParentEntity[] parents);
 
-                for (int i = 0; i < fireworkLen; i++) 
-                {
-                    FireworkEntity firework = fireworks[i];
-
-                    FireworkDomain.Move(firework);
-                }
+                //TODO
             }
         }
     }

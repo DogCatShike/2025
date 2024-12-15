@@ -36,6 +36,12 @@ public class AssetsCore
         }
     }
 
+    public GameObject Entity_GetParent()
+    {
+        entities.TryGetValue("Entity_Parent", out GameObject entity);
+        return entity;
+    }
+
     public GameObject Entity_GetFirework()
     {
         entities.TryGetValue("Entity_Firework", out GameObject entity);

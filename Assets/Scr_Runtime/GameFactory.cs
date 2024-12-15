@@ -4,6 +4,20 @@ using HNY;
 
 public static class GameFactory
 {
+    public static ParentEntity Parent_Create(GameContext ctx, int typeID)
+    {
+        GameObject go = ctx.assetsCore.Entity_GetParent();
+        go = GameObject.Instantiate(go);
+
+        ParentEntity entity = go.GetComponent<ParentEntity>();
+
+        entity.idSig.entityType = EntityType.Parent;
+        entity.idSig.entityID = ctx.idService.parentID++;
+
+        entity.Ctor();
+        return entity;
+    }
+
     public static FireworkEntity Firework_Create(GameContext ctx, int typeID, Transform parent)
     {
         GameObject go = ctx.assetsCore.Entity_GetFirework();

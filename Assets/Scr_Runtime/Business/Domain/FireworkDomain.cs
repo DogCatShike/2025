@@ -11,8 +11,15 @@ public static class FireworkDomain
         return entity;
     }
 
-    public static void Move(FireworkEntity firework)
+    #region 删除
+    // public static void Move(FireworkEntity firework)
+    // {
+    //     firework.Move();
+    // }
+    #endregion
+
+    public static void SetColor(FireworkEntity firework, Color color)
     {
-        firework.Move();
+        firework.SetColor(color);
     }
 }

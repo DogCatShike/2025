@@ -11,6 +11,7 @@ public class GameContext
     public InputCore inputCore;
 
     //repos
+    public ParentRepository parentRepository;
     public FireworkRepository fireworkRepository;
 
     public GameContext()
@@ -20,6 +21,7 @@ public class GameContext
         assetsCore = new AssetsCore();
         inputCore = new InputCore();
 
+        parentRepository = new ParentRepository();
         fireworkRepository = new FireworkRepository();
     }
 }
