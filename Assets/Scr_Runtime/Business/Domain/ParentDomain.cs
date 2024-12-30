@@ -20,10 +20,10 @@ public static class ParentDomain
     public static void Move(ParentEntity parent)
     {
         parent.Move();
+    }
 
-        if(parent.transform.position.y >= parent.beforePos.y + parent.size * 10)
-        {
-            parent.Stop();
-        }
+    public static void Stop(ParentEntity parent)
+    {
+        parent.Stop();
     }
 }

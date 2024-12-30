@@ -27,8 +27,4 @@ public class GameContext
         fireworkRepository = new FireworkRepository();
     }
 
-    public ParentEntity GetParent()
-    {
-        parentRepository.TryGet(, out ParentEntity parent);
-    }
 }

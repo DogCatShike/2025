@@ -5,7 +5,6 @@ using HNY;
 public class ParentEntity : MonoBehaviour
 {
     public IDSignature idSig;
-    public int typeID;
 
     [SerializeField]Rigidbody2D rb;
 
@@ -37,6 +36,8 @@ public class ParentEntity : MonoBehaviour
         pos = new Vector3(UnityEngine.Random.Range(0, Screen.width), UnityEngine.Random.Range(0, Screen.height/4*3), 0);
         pos = Camera.main.ScreenToWorldPoint(pos);
         pos.z = 0;
+
+        beforePos = pos;
     }
 
     public Color SetColor()
@@ -53,9 +54,7 @@ public class ParentEntity : MonoBehaviour
     }
 
     public void Move()
-    {
-        beforePos = transform.position;
-            
+    {            
         Vector2 pos = rb.velocity;
         pos.y = moveSpeed;
         rb.velocity = pos;

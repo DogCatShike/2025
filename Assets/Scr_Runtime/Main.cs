@@ -18,15 +18,15 @@ namespace HNY
         void Update()
         {
             bool isKey = ctx.inputCore.GetKeyDown();
+            float dt = Time.deltaTime;
 
             if(isKey)
             {
                 GameBusiness.Enter(ctx);
-                
-                int parentLen = ctx.parentRepository.TakeAll(out ParentEntity[] parents);
-
                 //TODO
             }
+
+            GameBusiness.Tick(ctx, dt);
         }
     }
 }
