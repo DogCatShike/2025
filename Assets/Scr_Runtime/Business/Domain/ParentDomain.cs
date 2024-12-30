@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using HNY;
+using System.Reflection;
 
 public static class ParentDomain
 {
@@ -19,5 +20,10 @@ public static class ParentDomain
     public static void Move(ParentEntity parent)
     {
         parent.Move();
+
+        if(parent.transform.position.y >= parent.beforePos.y + parent.size * 10)
+        {
+            parent.Stop();
+        }
     }
 }

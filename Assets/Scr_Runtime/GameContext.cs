@@ -5,6 +5,7 @@ using HNY;
 public class GameContext
 {
     public IDService idService;
+    public GameEntity gameEntity;
 
     //core
     public AssetsCore assetsCore;
@@ -17,11 +18,17 @@ public class GameContext
     public GameContext()
     {
         idService = new IDService();
+        gameEntity = new GameEntity();
 
         assetsCore = new AssetsCore();
         inputCore = new InputCore();
 
         parentRepository = new ParentRepository();
         fireworkRepository = new FireworkRepository();
+    }
+
+    public ParentEntity GetParent()
+    {
+        parentRepository.TryGet(, out ParentEntity parent);
     }
 }

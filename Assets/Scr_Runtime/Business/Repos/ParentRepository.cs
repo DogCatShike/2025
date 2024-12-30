@@ -36,5 +36,9 @@ public class ParentRepository
             return all.Count;
     }
     
+    public bool TryGet(IDSignature idSig, out ParentEntity entity)
+    {
+        return all.TryGetValue(idSig, out entity);
+    }
     //TODO
 }
