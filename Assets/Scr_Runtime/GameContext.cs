@@ -15,6 +15,7 @@ public class GameContext
     public ParentRepository parentRepository;
     public FireworkRepository fireworkRepository;
     public BoomRepository boomRepository;
+    public TileRepository tileRepository;
 
     public GameContext()
     {
@@ -27,6 +28,7 @@ public class GameContext
         parentRepository = new ParentRepository();
         fireworkRepository = new FireworkRepository();
         boomRepository = new BoomRepository();
+        tileRepository = new TileRepository();
     }
 
 }

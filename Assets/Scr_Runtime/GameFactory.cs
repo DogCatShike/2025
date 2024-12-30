@@ -45,4 +45,18 @@ public static class GameFactory
         entity.Ctor();
         return entity;
     }
+
+    public static TileEntity Tile_Create(GameContext ctx, Transform parent)
+    {
+        GameObject go = ctx.assetsCore.Entity_GetTile();
+        go = GameObject.Instantiate(go, parent);
+
+        TileEntity entity = go.GetComponent<TileEntity>();
+
+        entity.idSig.entityType = EntityType.Tile;
+        entity.idSig.entityID = ctx.idService.tileID++;
+
+        entity.Ctor();
+        return entity;
+    }
 }

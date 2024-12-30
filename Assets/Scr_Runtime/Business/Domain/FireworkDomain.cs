@@ -23,6 +23,11 @@ public static class FireworkDomain
         firework.SetColor(color);
     }
 
+    public static void SetScale(FireworkEntity firework, float dt)
+    {
+        firework.SetScale(dt);
+    }
+
     public static void TearDown(FireworkEntity firework)
     {
         firework.TearDown();

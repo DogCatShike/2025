@@ -83,9 +83,16 @@ public class FireworkEntity : MonoBehaviour
 
     public void SetColor(Color color)
     {
-        Renderer renderer = GetComponent<Renderer>();
+        Transform firework = transform.Find("Firework");
+
+        Renderer renderer = firework.GetComponent<Renderer>();
         renderer.material = new Material(Shader.Find("Unlit/Color"));
         renderer.material.color = color;
+    }
+    
+    public void SetScale(float dt)
+    {
+        transform.localScale += new Vector3(0, dt, 0) * 2;
     }
 
     public void TearDown()

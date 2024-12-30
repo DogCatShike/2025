@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 925474346683836473}
   - component: {fileID: 3038923271064369504}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,3 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64c3a3ff99e58e94196678820d796635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idSig:
+    value: 0
+    entityType: 0
+    entityID: 0
