@@ -4,9 +4,9 @@ using HNY;
 
 public static class FireworkDomain
 {
-    public static FireworkEntity Spawn(GameContext ctx, int typeID, Transform parent)
+    public static FireworkEntity Spawn(GameContext ctx, Transform parent)
     {
-        FireworkEntity entity = GameFactory.Firework_Create(ctx, typeID, parent);
+        FireworkEntity entity = GameFactory.Firework_Create(ctx, parent);
         ctx.fireworkRepository.Add(entity);
         return entity;
     }
@@ -21,5 +21,10 @@ public static class FireworkDomain
     public static void SetColor(FireworkEntity firework, Color color)
     {
         firework.SetColor(color);
+    }
+
+    public static void TearDown(FireworkEntity firework)
+    {
+        firework.TearDown();
     }
 }

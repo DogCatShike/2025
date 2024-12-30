@@ -47,4 +47,10 @@ public class AssetsCore
         entities.TryGetValue("Entity_Firework", out GameObject entity);
         return entity;
     }
+
+    public GameObject Entity_GetBoom()
+    {
+        entities.TryGetValue("Entity_Boom", out GameObject entity);
+        return entity;
+    }
 }

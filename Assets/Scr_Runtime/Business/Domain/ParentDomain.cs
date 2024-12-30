@@ -5,9 +5,9 @@ using System.Reflection;
 
 public static class ParentDomain
 {
-    public static ParentEntity Spawn(GameContext ctx, int typeID)
+    public static ParentEntity Spawn(GameContext ctx)
     {
-        ParentEntity entity = GameFactory.Parent_Create(ctx, typeID);
+        ParentEntity entity = GameFactory.Parent_Create(ctx);
         ctx.parentRepository.Add(entity);
         return entity;
     }
@@ -25,5 +25,10 @@ public static class ParentDomain
     public static void Stop(ParentEntity parent)
     {
         parent.Stop();
+    }
+
+    public static void TearDown(ParentEntity parent)
+    {
+        parent.TearDown();
     }
 }

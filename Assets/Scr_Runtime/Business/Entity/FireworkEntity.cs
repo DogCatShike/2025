@@ -5,9 +5,6 @@ using HNY;
 public class FireworkEntity : MonoBehaviour
 {
     public IDSignature idSig;
-    public int typeID;
-
-    [HideInInspector]public Color color;
 
     #region 删除
     // [SerializeField]Rigidbody2D rb;

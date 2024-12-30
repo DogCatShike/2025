@@ -6,17 +6,20 @@ public static class GameBusiness
 {
     public static void Enter(GameContext ctx)
     {
-        ParentEntity parentEntity = ParentDomain.Spawn(ctx, 1);
+        ParentEntity parentEntity = ParentDomain.Spawn(ctx);
         Transform parent = parentEntity.transform;
         Color color = ParentDomain.SetColor(parentEntity);
 
-        FireworkEntity fireworkEntity = FireworkDomain.Spawn(ctx, 2, parent);
+        FireworkEntity fireworkEntity = FireworkDomain.Spawn(ctx, parent);
         FireworkDomain.SetColor(fireworkEntity, color);
+
+        BoomEntity boomEntity = BoomDomain.Spawn(ctx, parent);
+        BoomDomain.SetColor(boomEntity, color);
     }
 
     public static void Tick(GameContext ctx, float dt)
     {
-        PreTick(ctx, dt);
+        PreTick(ctx);
 
         ref float restFixTime = ref ctx.gameEntity.restFixTime;
 
@@ -37,37 +40,63 @@ public static class GameBusiness
             }
         }
 
-        LastTick(ctx, dt);
+        LastTick(ctx);
     }
 
     //预处理
-    public static void PreTick(GameContext ctx, float dt)
+    public static void PreTick(GameContext ctx)
     {
-
+        int lenBoom = ctx.boomRepository.TakeAll(out BoomEntity[] booms);
+        for(int i = 0; i < lenBoom; i++)
+        {
+            BoomEntity boom = booms[i];
+            boom.gameObject.SetActive(false);
+        }
     }
 
     //每restFixTime检测
+    //用bool？太乱了（在哪加，何时用）
     public static void LogicTick(GameContext ctx, float dt)
     {
 
-        int lenParent = ctx.parentRepository.TakeAll(out ParentEntity[] parents);
+        int length = ctx.parentRepository.TakeAll(out ParentEntity[] parents);
+        ctx.fireworkRepository.TakeAll(out FireworkEntity[] fireworks);
+        ctx.boomRepository.TakeAll(out BoomEntity[] booms);
 
-        for(int i = 0; i < lenParent; i++)
+        for(int i = 0; i < length; i++)
         {
             ParentEntity parent = parents[i];
-            ParentDomain.Move(parent);
+            FireworkEntity firework = fireworks[i];
+            BoomEntity boom = booms[i];
+
+            if(parent.transform.position.y < parent.beforePos.y + parent.size * 15)
+            {
+                ParentDomain.Move(parent);
+            }
             // Debug.Log(parent.beforePos.y);
 
-            if(parent.transform.position.y >= parent.beforePos.y + parent.size * 15)
+            else
             {
                 ParentDomain.Stop(parent);
+
+                firework.gameObject.SetActive(false);
+
+                boom.gameObject.SetActive(true);
+                if(boom.transform.localScale.x < 10)
+                {
+                    BoomDomain.SetScale(boom, dt);
+                }
+                else
+                {
+                    BoomDomain.Stop(boom);
+                }
             }
         }
     }
 
     //收尾（内存释放？）
-    public static void LastTick(GameContext ctx, float dt)
+    public static void LastTick(GameContext ctx)
     {
-
+        
     }
 }

@@ -14,6 +14,7 @@ public class GameContext
     //repos
     public ParentRepository parentRepository;
     public FireworkRepository fireworkRepository;
+    public BoomRepository boomRepository;
 
     public GameContext()
     {
@@ -25,6 +26,7 @@ public class GameContext
 
         parentRepository = new ParentRepository();
         fireworkRepository = new FireworkRepository();
+        boomRepository = new BoomRepository();
     }
 
 }
