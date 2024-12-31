@@ -27,8 +27,19 @@ public static class ParentDomain
         parent.Stop();
     }
 
-    public static void TearDown(ParentEntity parent)
+    public static void TearDown(ParentEntity parent, GameContext ctx)
     {
+        ctx.parentRepository.Remove(parent);
         parent.TearDown();
+    }
+
+    public static void Clear(GameContext ctx)
+    {
+        int len = ctx.parentRepository.TakeAll(out ParentEntity[] entities);
+        for (int i = 0; i < len; i++)
+        {
+            ParentEntity entity = entities[i];
+            TearDown(entity, ctx);
+        }
     }
 }

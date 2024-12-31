@@ -59,6 +59,7 @@ public static class GameBusiness
 
     //每restFixTime检测
     //用bool？太乱了（在哪加，何时用）
+    //移至GameDomain？
     public static void LogicTick(GameContext ctx, float dt)
     {
 
@@ -98,6 +99,15 @@ public static class GameBusiness
                 else
                 {
                     BoomDomain.Stop(boom);
+                }
+
+                if(boom.alpha >= 0)
+                {
+                    BoomDomain.SetAlpha(boom, dt);
+                }
+                else
+                {
+                    boom.gameObject.SetActive(false);
                 }
             }
         }

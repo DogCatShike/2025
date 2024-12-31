@@ -21,8 +21,19 @@ public static class TileDomain
         entity.SetScale(dt);
     }
 
-    public static void TearDown(TileEntity entity)
+    public static void TearDown(TileEntity entity, GameContext ctx)
     {
+        ctx.tileRepository.Remove(entity);
         entity.TearDown();
+    }
+
+    public static void Clear(GameContext ctx)
+    {
+        int len = ctx.tileRepository.TakeAll(out TileEntity[] entities);
+        for (int i = 0; i < len; i++)
+        {
+            TileEntity entity = entities[i];
+            TearDown(entity, ctx);
+        }
     }
 }

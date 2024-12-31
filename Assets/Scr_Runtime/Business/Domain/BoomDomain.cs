@@ -26,8 +26,24 @@ public static class BoomDomain
         entity.Stop();
     }
 
-    public static void TearDown(BoomEntity entity)
+    public static void SetAlpha(BoomEntity entity, float dt)
     {
+        entity.SetAlpha(dt);
+    }
+
+    public static void TearDown(BoomEntity entity, GameContext ctx)
+    {
+        ctx.boomRepository.Remove(entity);
         entity.TearDown();
+    }
+
+    public static void Clear(GameContext ctx)
+    {
+        int len = ctx.boomRepository.TakeAll(out BoomEntity[] entities);
+        for (int i = 0; i < len; i++)
+        {
+            BoomEntity entity = entities[i];
+            TearDown(entity, ctx);
+        }
     }
 }

@@ -28,8 +28,19 @@ public static class FireworkDomain
         firework.SetScale(dt);
     }
 
-    public static void TearDown(FireworkEntity firework)
+    public static void TearDown(FireworkEntity firework, GameContext ctx)
     {
+        ctx.fireworkRepository.Remove(firework);
         firework.TearDown();
+    }
+
+    public static void Clear(GameContext ctx)
+    {
+        int len = ctx.fireworkRepository.TakeAll(out FireworkEntity[] entities);
+        for (int i = 0; i < len; i++)
+        {
+            FireworkEntity entity = entities[i];
+            TearDown(entity, ctx);
+        }
     }
 }

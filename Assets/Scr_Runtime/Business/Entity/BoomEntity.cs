@@ -6,6 +6,8 @@ public class BoomEntity : MonoBehaviour
 {
     public IDSignature idSig;
 
+    public float alpha = 1;
+
     public void Ctor()
     {
 
@@ -26,6 +28,14 @@ public class BoomEntity : MonoBehaviour
     public void Stop()
     {
         transform.localScale = transform.localScale;
+    }
+
+    public void SetAlpha(float dt)
+    {
+        alpha -= dt * 1.5f;
+
+        Renderer renderer = GetComponent<Renderer>();
+        renderer.material.SetFloat("_Transparency", alpha);
     }
 
     public void TearDown()
