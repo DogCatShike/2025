@@ -6,5 +6,7 @@ public enum EntityType
     Parent,
     Firework,
     Tile,
-    Boom//待定
+    Boom,//待定
+    Head,
+    Body
 }

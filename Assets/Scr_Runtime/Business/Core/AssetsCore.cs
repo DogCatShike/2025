@@ -59,4 +59,10 @@ public class AssetsCore
         entities.TryGetValue("Entity_Tile", out GameObject entity);
         return entity;
     }
+
+    public GameObject Entity_GetHead()
+    {
+        entities.TryGetValue("Entity_Head", out GameObject entity);
+        return entity;
+    }
 }

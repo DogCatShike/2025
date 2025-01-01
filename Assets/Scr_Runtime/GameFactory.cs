@@ -59,4 +59,18 @@ public static class GameFactory
         entity.Ctor();
         return entity;
     }
+
+    public static HeadEntity Head_Create(GameContext ctx, Transform parent)
+    {
+        GameObject go = ctx.assetsCore.Entity_GetHead();
+        go = GameObject.Instantiate(go, parent);
+
+        HeadEntity entity = go.GetComponent<HeadEntity>();
+
+        entity.idSig.entityType = EntityType.Head;
+        entity.idSig.entityID = ctx.idService.headID++;
+
+        entity.Ctor();
+        return entity;
+    }
 }

@@ -18,6 +18,9 @@ public static class GameBusiness
 
         BoomEntity boomEntity = BoomDomain.Spawn(ctx, parent);
         BoomDomain.SetColor(boomEntity, color);
+
+        HeadEntity headEntity = HeadDomain.Spawn(ctx, parent);
+        HeadDomain.SetColor(headEntity, color);
     }
 
     public static void Tick(GameContext ctx, float dt)
@@ -50,10 +53,15 @@ public static class GameBusiness
     public static void PreTick(GameContext ctx)
     {
         int lenBoom = ctx.boomRepository.TakeAll(out BoomEntity[] booms);
+        ctx.headRepository.TakeAll(out HeadEntity[] heads);
+
         for(int i = 0; i < lenBoom; i++)
         {
             BoomEntity boom = booms[i];
             boom.gameObject.SetActive(false);
+
+            HeadEntity head = heads[i];
+            head.gameObject.SetActive(false);
         }
     }
 
@@ -67,6 +75,7 @@ public static class GameBusiness
         ctx.fireworkRepository.TakeAll(out FireworkEntity[] fireworks);
         ctx.tileRepository.TakeAll(out TileEntity[] tiles);
         ctx.boomRepository.TakeAll(out BoomEntity[] booms);
+        ctx.headRepository.TakeAll(out HeadEntity[] heads);
 
         for(int i = 0; i < length; i++)
         {
@@ -74,6 +83,7 @@ public static class GameBusiness
             FireworkEntity firework = fireworks[i];
             TileEntity tile = tiles[i];
             BoomEntity boom = booms[i];
+            HeadEntity head = heads[i];
 
             if(parent.transform.position.y < parent.beforePos.y + parent.size * 15)
             {
@@ -99,6 +109,8 @@ public static class GameBusiness
                 else
                 {
                     BoomDomain.Stop(boom);
+
+                    head.gameObject.SetActive(true);
                 }
 
                 if(boom.alpha >= 0)
@@ -114,6 +126,7 @@ public static class GameBusiness
     }
 
     //收尾（内存释放？）
+    //应该不是
     public static void LastTick(GameContext ctx)
     {
         

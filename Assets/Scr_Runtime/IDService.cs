@@ -8,6 +8,7 @@ public class IDService
     public int fireworkID;
     public int boomID;
     public int tileID;
+    public int headID;
 
     public IDService()
     {
@@ -15,5 +16,6 @@ public class IDService
         fireworkID = 0;
         boomID = 0;
         tileID = 0;
+        headID = 0;
     }
 }
