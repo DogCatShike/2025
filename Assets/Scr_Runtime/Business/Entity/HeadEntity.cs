@@ -54,12 +54,29 @@ public class HeadEntity : MonoBehaviour
 
         //TODO: 要算，但今天懒得算
         //先硬写吧，懒得算公式
+        float[,] move = new float[10, 2]
+        {
+            {-12.5f, 55.3f},
+            {-60.9f, 69.8f},
+            {-92.9f, 78.1f},
+            {-114.9f, 61.7f},
+            {-155.4f, 52.8f},
+            {-192.4f, 51.2f},
+            {-219.4f, 58.3f},
+            {-250.1f, 76.6f},
+            {84.4f, 72.3f},
+            {39.3f, 56.9f}
+        };
+        
         for(int i = 0; i < heads.Length; i++)
         {
             GameObject head = heads[i];
+            
+            float rot = move[i, 0];
+            float dist = move[i, 1];
 
-            Transform tile = head.transform.Find("Tile");
-            tile.localScale += new Vector3(0, dt, 0);
+            head.transform.rotation = Quaternion.Euler(0, 0, rot);
+
         }
     }
 
