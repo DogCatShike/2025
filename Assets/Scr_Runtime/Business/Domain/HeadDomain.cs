@@ -16,8 +16,9 @@ public static class HeadDomain
         head.SetColor(color);
     }
 
-    public static void Move(HeadEntity head)
+    public static void Move(HeadEntity head, float dt)
     {
+        head.Move(dt);
         //TODO
     }
 

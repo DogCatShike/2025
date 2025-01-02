@@ -111,6 +111,7 @@ public static class GameBusiness
                     BoomDomain.Stop(boom);
 
                     head.gameObject.SetActive(true);
+                    HeadDomain.Move(head, dt);
                 }
 
                 if(boom.alpha >= 0)
