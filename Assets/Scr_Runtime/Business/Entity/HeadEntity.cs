@@ -8,6 +8,8 @@ public class HeadEntity : MonoBehaviour
 
     public GameObject[] heads;
 
+    bool isMoving;
+
     public void Ctor()
     {
         heads = new GameObject[10];
@@ -16,6 +18,8 @@ public class HeadEntity : MonoBehaviour
         {
             heads[i] = transform.Find("Head" + (i+1)).gameObject;
         }
+
+        isMoving = true;
     }
 
     public void SetColor(Color color)
@@ -68,20 +72,38 @@ public class HeadEntity : MonoBehaviour
             {39.3f, 56.9f}
         };
         
-        for(int i = 0; i < heads.Length; i++)
+        if(isMoving)
         {
-            GameObject head = heads[i];
-            
-            float rot = move[i, 0];
-            float dist = move[i, 1];
+            for(int i = 0; i < heads.Length; i++)
+            {
+                GameObject head = heads[i];
+                
+                float rot = move[i, 0];
+                float dist = move[i, 1];
 
-            head.transform.rotation = Quaternion.Euler(0, 0, rot);
+                head.transform.rotation = Quaternion.Euler(0, 0, rot);
 
+                Vector3 dir = head.transform.up;
+                head.transform.position += dir * dist * dt / 150;
+                //2秒停止？
+                //这个一点不严谨，都没计算
+
+                //这合理吗？
+                //改移动或者改停止，运动距离根据scale决定
+                Invoke("Stop", 2);
+            }
         }
+    }
+
+    public void Stop()
+    {
+        isMoving = false;
     }
 
     public void TearDown()
     {
+        //这里要单独销毁数组的每个head吗？
+
         Destroy(gameObject);
     }
 }

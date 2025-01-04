@@ -19,7 +19,6 @@ public static class HeadDomain
     public static void Move(HeadEntity head, float dt)
     {
         head.Move(dt);
-        //TODO
     }
 
     public static void TearDown(HeadEntity head, GameContext ctx)
