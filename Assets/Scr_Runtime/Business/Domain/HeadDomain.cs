@@ -16,9 +16,9 @@ public static class HeadDomain
         head.SetColor(color);
     }
 
-    public static void Move(HeadEntity head, float dt)
+    public static void Move(HeadEntity head, float dt, float size)
     {
-        head.Move(dt);
+        head.Move(dt, size);
     }
 
     public static void TearDown(HeadEntity head, GameContext ctx)

@@ -8,7 +8,7 @@ public class HeadEntity : MonoBehaviour
 
     public GameObject[] heads;
 
-    bool isMoving;
+    public bool isMoving;
 
     public void Ctor()
     {
@@ -52,10 +52,8 @@ public class HeadEntity : MonoBehaviour
         }
     }
 
-    public void Move(float dt)
+    public void Move(float dt, float size)
     {
-        SetScale(dt);
-
         //TODO: 要算，但今天懒得算
         //先硬写吧，懒得算公式
         float[,] move = new float[10, 2]
@@ -74,12 +72,15 @@ public class HeadEntity : MonoBehaviour
         
         if(isMoving)
         {
+            SetScale(dt);
+
             for(int i = 0; i < heads.Length; i++)
             {
                 GameObject head = heads[i];
                 
                 float rot = move[i, 0];
                 float dist = move[i, 1];
+                dist = dist * size / 0.2f;
 
                 head.transform.rotation = Quaternion.Euler(0, 0, rot);
 

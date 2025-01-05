@@ -85,6 +85,8 @@ public static class GameBusiness
             BoomEntity boom = booms[i];
             HeadEntity head = heads[i];
 
+            float size = parent.size;
+
             if(parent.transform.position.y < parent.beforePos.y + parent.size * 15)
             {
                 ParentDomain.Move(parent);
@@ -111,7 +113,7 @@ public static class GameBusiness
                     BoomDomain.Stop(boom);
 
                     head.gameObject.SetActive(true);
-                    HeadDomain.Move(head, dt);
+                    HeadDomain.Move(head, dt, size);
                 }
 
                 if(boom.alpha >= 0)
@@ -121,6 +123,11 @@ public static class GameBusiness
                 else
                 {
                     boom.gameObject.SetActive(false);
+                }
+
+                if(!head.isMoving)
+                {
+                    head.gameObject.SetActive(false);
                 }
             }
         }
