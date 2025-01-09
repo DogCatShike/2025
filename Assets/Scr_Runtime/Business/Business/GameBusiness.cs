@@ -127,7 +127,7 @@ public static class GameBusiness
 
                 if(!head.isMoving)
                 {
-                    head.gameObject.SetActive(false);
+                    
                 }
             }
         }

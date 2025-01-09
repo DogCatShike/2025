@@ -29,7 +29,7 @@ public class HeadEntity : MonoBehaviour
             GameObject head = heads[i];
 
             Renderer renderer = head.GetComponent<Renderer>();
-            renderer.material = new Material(Shader.Find("Unlit/Color"));
+            renderer.material = new Material(Shader.Find("Custom/HeadShader"));
             renderer.material.color = color;
 
             GameObject tile = head.transform.Find("Tile").gameObject;
@@ -104,7 +104,7 @@ public class HeadEntity : MonoBehaviour
     public void TearDown()
     {
         //这里要单独销毁数组的每个head吗？
-
+        //应该不用
         Destroy(gameObject);
     }
 }
