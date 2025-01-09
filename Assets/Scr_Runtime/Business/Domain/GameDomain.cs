@@ -11,4 +11,9 @@ public static class GameDomain
         BoomDomain.Clear(ctx);
         ParentDomain.Clear(ctx);
     }
+
+    public static void GameOver(GameContext ctx)
+    {
+        ClearAll(ctx);
+    }
 }
