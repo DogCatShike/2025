@@ -26,6 +26,11 @@ public class HeadEntity : MonoBehaviour
 
     public void SetColor(Color color)
     {
+        //提高颜色饱和度（RGBToHSV: Color转换为HSV模型，三个返回值分别为色相 饱和度 明度）
+        float hue, saturation, value;
+        Color.RGBToHSV(color, out hue, out saturation, out value);
+        Color tileColer = Color.HSVToRGB(hue, saturation, 1.0f);
+
         for(int i = 0; i < heads.Length; i++)
         {
             GameObject head = heads[i];
@@ -39,7 +44,7 @@ public class HeadEntity : MonoBehaviour
             Renderer tileRenderer = tile.GetComponent<Renderer>();
             tileRenderer.material = new Material(Shader.Find("Standard"));
             tileRenderer.material.SetFloat("_Mode", 3);
-            tileRenderer.material.color = color;
+            tileRenderer.material.color = tileColer;
         }
     }
 
