@@ -21,6 +21,16 @@ public static class HeadDomain
         head.Move(dt, size);
     }
 
+    public static bool SetTileScale(HeadEntity head, float dt)
+    {
+        return head.SetTileScale(dt);
+    }
+
+    public static void SetHeadAlpha(HeadEntity head, float dt)
+    {
+        head.SetHeadAlpha(dt);
+    }
+
     public static void TearDown(HeadEntity head, GameContext ctx)
     {
         ctx.headRepository.Remove(head);

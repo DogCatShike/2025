@@ -127,7 +127,17 @@ public static class GameBusiness
 
                 if(!head.isMoving)
                 {
-                    
+                    bool isTileScale = HeadDomain.SetTileScale(head, dt);
+
+                    if(isTileScale)
+                    {
+                        HeadDomain.SetHeadAlpha(head, dt);
+                        
+                        if(head.alpha <= 0.1)
+                        {
+                            head.gameObject.SetActive(false);
+                        }
+                    }
                 }
             }
         }

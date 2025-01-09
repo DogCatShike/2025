@@ -10,6 +10,8 @@ public class HeadEntity : MonoBehaviour
 
     public bool isMoving;
 
+    public float alpha = 0.8f;
+
     public void Ctor()
     {
         heads = new GameObject[10];
@@ -48,7 +50,7 @@ public class HeadEntity : MonoBehaviour
             GameObject head = heads[i];
 
             Transform tile = head.transform.Find("Tile");
-            tile.localScale += new Vector3(0, dt, 0);
+            tile.localScale += new Vector3(0, dt, 0) * 1.3f;
         }
     }
 
@@ -99,6 +101,36 @@ public class HeadEntity : MonoBehaviour
     public void Stop()
     {
         isMoving = false;
+    }
+
+    public bool SetTileScale(float dt)
+    {
+        for(int i = 0; i < heads.Length; i++)
+        {
+            GameObject head = heads[i];
+            GameObject tile = head.transform.Find("Tile").gameObject;
+
+            tile.transform.localScale -= new Vector3(0, dt, 0) * 2;
+
+            if(tile.transform.localScale.y <= 1)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void SetHeadAlpha(float dt)
+    {
+        alpha -= dt * 1.2f;
+
+        for(int i = 0; i < heads.Length; i++)
+        {
+            GameObject head = heads[i];
+
+            Renderer renderer = head.GetComponent<Renderer>();
+            renderer.material.SetFloat("_Transparency", alpha);
+        }
     }
 
     public void TearDown()
