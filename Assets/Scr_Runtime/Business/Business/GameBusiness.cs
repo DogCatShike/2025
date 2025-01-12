@@ -85,6 +85,7 @@ public static class GameBusiness
             BoomEntity boom = booms[i];
             HeadEntity head = heads[i];
 
+            #region 运行逻辑
             float size = parent.size;
 
             if(parent.transform.position.y < parent.beforePos.y + parent.size * 15)
@@ -136,10 +137,25 @@ public static class GameBusiness
                         if(head.alpha <= 0.1)
                         {
                             head.gameObject.SetActive(false);
+
+                            //写了tile后再改这里
+                            parent.gameObject.SetActive(false);
                         }
                     }
                 }
             }
+            #endregion
+
+            #region 清理内存
+            if(parent.isActiveAndEnabled == false)
+            {
+                FireworkDomain.TearDown(firework, ctx);
+                TileDomain.TearDown(tile, ctx);
+                BoomDomain.TearDown(boom, ctx);
+                HeadDomain.TearDown(head, ctx);
+                ParentDomain.TearDown(parent, ctx);
+            }
+            #endregion
         }
     }
 
