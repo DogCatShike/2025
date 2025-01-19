@@ -55,7 +55,7 @@ public class HeadEntity : MonoBehaviour
             GameObject head = heads[i];
 
             Transform tile = head.transform.Find("Tile");
-            tile.localScale += new Vector3(0, dt, 0) * 1.3f;
+            tile.localScale += new Vector3(0, dt, 0) * 8f;
         }
     }
 
@@ -92,13 +92,18 @@ public class HeadEntity : MonoBehaviour
                 head.transform.rotation = Quaternion.Euler(0, 0, rot);
 
                 Vector3 dir = head.transform.up;
-                head.transform.position += dir * dist * dt / 150;
+                head.transform.position += dir * dist * dt / 20;
+                
                 //2秒停止？
                 //这个一点不严谨，都没计算
-
                 //这合理吗？
                 //改移动或者改停止，运动距离根据scale决定
-                Invoke("Stop", 2);
+                // Invoke("Stop", 2);
+            }
+
+            if(heads[2].transform.localPosition.x >= 5.15)
+            {
+                isMoving = false;
             }
         }
     }
@@ -115,7 +120,7 @@ public class HeadEntity : MonoBehaviour
             GameObject head = heads[i];
             GameObject tile = head.transform.Find("Tile").gameObject;
 
-            tile.transform.localScale -= new Vector3(0, dt, 0) * 2;
+            tile.transform.localScale -= new Vector3(0, dt, 0) * 3.5f;
 
             if(tile.transform.localScale.y <= 1)
             {
