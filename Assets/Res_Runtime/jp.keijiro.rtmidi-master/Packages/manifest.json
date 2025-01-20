@@ -1,0 +1,13 @@
+{
+  "scopedRegistries": [
+    {
+      "name": "Keijiro",
+      "url": "https://registry.npmjs.com",
+      "scopes": [ "jp.keijiro" ]
+    }
+  ],
+  "dependencies": {
+    "jp.keijiro.rtmidi": "1.0.4",
+    "com.unity.modules.imgui": "1.0.0"
+  }
+}

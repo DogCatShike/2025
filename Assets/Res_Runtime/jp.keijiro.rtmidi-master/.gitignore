@@ -1,0 +1,23 @@
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# Vim
+*.swp
+
+# Visual Studio
+.vs
+*.vcxproj.user
+/RtMidi/VisualStudio/x64
+
+# macOS build
+/RtMidi/macOS/*.bundle
+/RtMidi/macOS/*.so
+
+# Unity
+/Library
+/Logs
+/Temp
