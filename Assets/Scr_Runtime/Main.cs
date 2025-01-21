@@ -9,6 +9,8 @@ namespace HNY
     {
         GameContext ctx;
 
+        bool hasFirework = false;
+
         void Awake()
         {
             ctx = new GameContext();
@@ -22,10 +24,15 @@ namespace HNY
             bool isKey = ctx.inputCore.getKeyDown;
             float dt = Time.deltaTime;
 
-            if(isKey)
+            if(isKey && !hasFirework)
             {
                 GameBusiness.Enter(ctx);
+                hasFirework = true;
                 //TODO
+            }
+            else if(!isKey)
+            {
+                hasFirework = false;
             }
 
             GameBusiness.Tick(ctx, dt);
