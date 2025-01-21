@@ -9,11 +9,12 @@ namespace HNY
     {
         GameContext ctx;
 
-        bool hasFirework = false;
+        bool hasFirework;
 
         void Awake()
         {
             ctx = new GameContext();
+            hasFirework = false;
 
             ctx.assetsCore.LoadAll();
         }

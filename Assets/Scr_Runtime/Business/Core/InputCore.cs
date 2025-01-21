@@ -11,8 +11,8 @@ public class InputCore
         //onDeviceChange 输入设备变化触发事件
         InputSystem.onDeviceChange += (device, change) =>
         {
-            //Added 添加新设备
-            if (change != InputDeviceChange.Added) return;
+            // //Added 添加新设备
+            // if (change != InputDeviceChange.Added) return;
 
             var midiDevice = device as Minis.MidiDevice;
             if (midiDevice == null) return;
@@ -28,7 +28,7 @@ public class InputCore
                 // ));
                 
                 getKeyDown = true;
-
+                
                 //TODO: 播放音频
             };
 
