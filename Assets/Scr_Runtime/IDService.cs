@@ -9,6 +9,7 @@ public class IDService
     public int boomID;
     public int tileID;
     public int headID;
+    public int audioID;
 
     public IDService()
     {
@@ -17,5 +18,6 @@ public class IDService
         boomID = 0;
         tileID = 0;
         headID = 0;
+        audioID = 0;
     }
 }

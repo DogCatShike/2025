@@ -8,6 +8,7 @@ namespace HNY
     public class Main : MonoBehaviour
     {
         GameContext ctx;
+        AudioEntity au;
 
         bool hasFirework;
 
@@ -19,9 +20,14 @@ namespace HNY
             ctx.assetsCore.LoadAll();
         }
 
+        public void Start()
+        {
+            au = AudioDomain.Spawn(ctx);
+        }
+
         void Update()
         {
-            ctx.inputCore.GetKey();
+            ctx.inputCore.GetKey(au);
             bool isKey = ctx.inputCore.getKeyDown;
             float dt = Time.deltaTime;
 

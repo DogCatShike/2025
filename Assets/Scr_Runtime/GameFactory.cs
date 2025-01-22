@@ -73,4 +73,18 @@ public static class GameFactory
         entity.Ctor();
         return entity;
     }
+
+    public static AudioEntity Audio_Create(GameContext ctx)
+    {
+        GameObject go = ctx.assetsCore.Entity_GetAudio();
+        go = GameObject.Instantiate(go);
+
+        AudioEntity entity = go.GetComponent<AudioEntity>();
+
+        entity.idSig.entityType = EntityType.Audio;
+        entity.idSig.entityID = ctx.idService.audioID++;
+
+        entity.Ctor();
+        return entity;
+    }
 }

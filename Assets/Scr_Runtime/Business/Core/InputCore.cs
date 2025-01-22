@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class InputCore
 {
     public bool getKeyDown;
-    public void GetKey()
+    public void GetKey(AudioEntity au)
     {
         //onDeviceChange 输入设备变化触发事件
         InputSystem.onDeviceChange += (device, change) =>
@@ -30,6 +30,8 @@ public class InputCore
                 getKeyDown = true;
                 
                 //TODO: 播放音频
+                AudioDomain.SetClip(au, note.shortDisplayName);
+                AudioDomain.Play(au);
             };
 
             midiDevice.onWillNoteOff += (note) => {

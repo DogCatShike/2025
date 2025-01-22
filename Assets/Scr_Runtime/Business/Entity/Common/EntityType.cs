@@ -8,5 +8,6 @@ public enum EntityType
     Tile,
     Boom,//待定
     Head,
-    Body
+    Body,
+    Audio,
 }

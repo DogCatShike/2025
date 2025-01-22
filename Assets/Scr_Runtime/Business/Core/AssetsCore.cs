@@ -65,4 +65,10 @@ public class AssetsCore
         entities.TryGetValue("Entity_Head", out GameObject entity);
         return entity;
     }
+
+    public GameObject Entity_GetAudio()
+    {
+        entities.TryGetValue("Entity_Audio", out GameObject entity);
+        return entity;
+    }
 }
