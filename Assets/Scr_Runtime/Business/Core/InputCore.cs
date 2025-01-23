@@ -6,7 +6,10 @@ using UnityEngine.InputSystem;
 public class InputCore
 {
     public bool getKeyDown;
-    public void GetKey(AudioEntity au)
+
+    public int noteNumber;
+
+    public int GetKey()
     {
         //onDeviceChange 输入设备变化触发事件
         InputSystem.onDeviceChange += (device, change) =>
@@ -28,10 +31,7 @@ public class InputCore
                 ));
                 
                 getKeyDown = true;
-                
-                //TODO: 播放音频
-                AudioDomain.SetClip(au, note.noteNumber);
-                AudioDomain.Play(au);
+                noteNumber = note.noteNumber;
             };
 
             midiDevice.onWillNoteOff += (note) => {
@@ -44,10 +44,9 @@ public class InputCore
                 // ));
 
                 getKeyDown = false;
-
-                //TODO: 停止音频播放(渐弱)
-                AudioDomain.Stop(au);
             };
         };
+
+        return noteNumber;
     }
 }

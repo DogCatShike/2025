@@ -4,8 +4,12 @@ using HNY;
 
 public static class GameBusiness
 {
-    public static void Enter(GameContext ctx)
+    public static void Enter(GameContext ctx, int noteNumber)
     {
+        AudioEntity audioEntity = AudioDomain.Spawn(ctx);
+        AudioDomain.SetClip(audioEntity, noteNumber);
+        AudioDomain.Play(audioEntity);
+
         ParentEntity parentEntity = ParentDomain.Spawn(ctx);
         Transform parent = parentEntity.transform;
         Color color = ParentDomain.SetColor(parentEntity);
@@ -76,9 +80,11 @@ public static class GameBusiness
         ctx.tileRepository.TakeAll(out TileEntity[] tiles);
         ctx.boomRepository.TakeAll(out BoomEntity[] booms);
         ctx.headRepository.TakeAll(out HeadEntity[] heads);
+        ctx.audioRepository.TakeAll(out AudioEntity[] audios);
 
         for(int i = 0; i < length; i++)
         {
+            AudioEntity audio = audios[i];
             ParentEntity parent = parents[i];
             FireworkEntity firework = fireworks[i];
             TileEntity tile = tiles[i];
@@ -149,6 +155,7 @@ public static class GameBusiness
             #region 清理内存
             if(parent.isActiveAndEnabled == false)
             {
+                AudioDomain.TearDown(audio, ctx);
                 FireworkDomain.TearDown(firework, ctx);
                 TileDomain.TearDown(tile, ctx);
                 BoomDomain.TearDown(boom, ctx);

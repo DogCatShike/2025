@@ -12,6 +12,7 @@ public class GameContext
     public InputCore inputCore;
 
     //repos
+    public AudioRepository audioRepository;
     public ParentRepository parentRepository;
     public FireworkRepository fireworkRepository;
     public BoomRepository boomRepository;
@@ -26,6 +27,7 @@ public class GameContext
         assetsCore = new AssetsCore();
         inputCore = new InputCore();
 
+        audioRepository = new AudioRepository();
         parentRepository = new ParentRepository();
         fireworkRepository = new FireworkRepository();
         boomRepository = new BoomRepository();

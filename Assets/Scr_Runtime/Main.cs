@@ -20,20 +20,15 @@ namespace HNY
             ctx.assetsCore.LoadAll();
         }
 
-        public void Start()
-        {
-            au = AudioDomain.Spawn(ctx);
-        }
-
         void Update()
         {
-            ctx.inputCore.GetKey(au);
+            int noteNumber = ctx.inputCore.GetKey();
             bool isKey = ctx.inputCore.getKeyDown;
             float dt = Time.deltaTime;
 
             if(isKey && !hasFirework)
             {
-                GameBusiness.Enter(ctx);
+                GameBusiness.Enter(ctx, noteNumber);
                 hasFirework = true;
                 //TODO
             }
