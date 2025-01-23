@@ -141,8 +141,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e646b045bcd04e14fa915ac108ae2904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 6547864195316027006}
   idSig:
     value: 0
     entityType: 0
     entityID: 0
+  clips:
+  - {fileID: 8300000, guid: a5d129d9818ef514294fb5be3bf5b21b, type: 3}
+  - {fileID: 8300000, guid: f38708be3e6a6c646ab932485bbc6ab7, type: 3}
+  - {fileID: 8300000, guid: 8b390730d53e0724183eaddbc3513b91, type: 3}
+  - {fileID: 8300000, guid: 7dd8901a09131174682146d475c704a3, type: 3}
+  - {fileID: 8300000, guid: ed28c873bc309b948b4bbfc8e6346863, type: 3}
+  - {fileID: 8300000, guid: f9c04d7af427ec0459f4d423c36112e7, type: 3}
+  - {fileID: 8300000, guid: 4461a1c4b2a6f1f439f4720cea902c9a, type: 3}
+  - {fileID: 8300000, guid: e1137dd0076cc274cb5145171aa4def9, type: 3}
+  - {fileID: 8300000, guid: dd1ce62169e80724f95c0fb35e977f0b, type: 3}
+  - {fileID: 8300000, guid: f4fcff66eca012c4c9b0b9986fc4dae9, type: 3}
+  - {fileID: 8300000, guid: d035a5715cf0a9b43800f45ee50ec751, type: 3}
+  - {fileID: 8300000, guid: 181b6f9bfc057274ba1d3ffb34de1803, type: 3}
+  - {fileID: 8300000, guid: 50130c6968229b04f82ec02880abbc8b, type: 3}
+  - {fileID: 8300000, guid: 974c713fab28dd242a5b35269d36c829, type: 3}
+  - {fileID: 8300000, guid: 53f34338630da3b4ebe6323b4bbab276, type: 3}
+  - {fileID: 8300000, guid: e70955f0f0cf68941bc05f15bff12ef8, type: 3}
+  - {fileID: 8300000, guid: fd39666ece635b24eba926b2a391a690, type: 3}
+  - {fileID: 8300000, guid: a055817712ad1804ca98986d7f8ead35, type: 3}
+  - {fileID: 8300000, guid: 9c01c17881dbd12479418a930f9f1a73, type: 3}
+  - {fileID: 8300000, guid: ab8527fe0f520c24696ea9c1a6466b5f, type: 3}
+  - {fileID: 8300000, guid: 2a4875652b0c7eb4b95e79797d01f362, type: 3}
+  - {fileID: 8300000, guid: 5699b191126ffe641b722d670f5c9bd9, type: 3}
+  - {fileID: 8300000, guid: 9aacbb5dc0da73844b4a2a38504dbb6c, type: 3}
+  - {fileID: 8300000, guid: 75ead68b0033a27498a2ec8887eb3fd1, type: 3}
+  - {fileID: 8300000, guid: e5853b3d6f608f44c9679be6739cbae7, type: 3}

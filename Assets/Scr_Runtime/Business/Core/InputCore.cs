@@ -18,19 +18,19 @@ public class InputCore
             if (midiDevice == null) return;
 
             midiDevice.onWillNoteOn += (note, velocity) => {
-                // Debug.Log(string.Format(
-                //     "Note On #{0} ({1}) vel:{2:0.00} ch:{3} dev:'{4}'",
-                //     note.noteNumber,
-                //     note.shortDisplayName,
-                //     velocity,
-                //     (note.device as Minis.MidiDevice)?.channel,
-                //     note.device.description.product
-                // ));
+                Debug.Log(string.Format(
+                    "Note On #{0} ({1}) vel:{2:0.00} ch:{3} dev:'{4}'",
+                    note.noteNumber,
+                    note.shortDisplayName,
+                    velocity,
+                    (note.device as Minis.MidiDevice)?.channel,
+                    note.device.description.product
+                ));
                 
                 getKeyDown = true;
                 
                 //TODO: 播放音频
-                AudioDomain.SetClip(au, note.shortDisplayName);
+                AudioDomain.SetClip(au, note.noteNumber);
                 AudioDomain.Play(au);
             };
 
@@ -46,6 +46,7 @@ public class InputCore
                 getKeyDown = false;
 
                 //TODO: 停止音频播放(渐弱)
+                AudioDomain.Stop(au);
             };
         };
     }

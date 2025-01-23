@@ -11,14 +11,19 @@ public static class AudioDomain
         return entity;
     }
 
-    public static void SetClip(AudioEntity audio, string shortDisplayName)
+    public static void SetClip(AudioEntity audio, int noteNumber)
     {
-        audio.SetClip(shortDisplayName);
+        audio.SetClip(noteNumber);
     }
 
     public static void Play(AudioEntity audio)
     {
         audio.Play();
+    }
+
+    public static void Stop(AudioEntity audio)
+    {
+        audio.Stop();
     }
 
     public static void TearDown(AudioEntity audio, GameContext ctx)

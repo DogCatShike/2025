@@ -16,24 +16,26 @@ public class AudioEntity : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void SetClip(string shortDisplayName)
+    public void SetClip(int noteNumber)
     {
-        AudioClip clip = clips.FirstOrDefault(c => c.name == shortDisplayName);
+        if(audioSource == null)
+        {
+            Debug.LogError("AudioSource is null");
+            return;
+        }
         
-        if(clip!= null)
-        {
-            audioSource.clip = clip;
-            audioSource.loop = true;
-        }
-        else
-        {
-            Debug.LogError($"没有找到名为 {shortDisplayName} 的 AudioClip。");
-        }
+        audioSource.clip = clips[noteNumber - 48];
+        audioSource.loop = false;
     }
 
     public void Play()
     {
         audioSource.Play();
+    }
+
+    public void Stop()
+    {
+        audioSource.Stop();
     }
 
     public void TearDown()
