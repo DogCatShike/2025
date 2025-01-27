@@ -10,4 +10,5 @@ public enum EntityType
     Head,
     Body,
     Audio,
+    Foot,
 }

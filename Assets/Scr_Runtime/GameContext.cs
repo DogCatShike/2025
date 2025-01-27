@@ -18,6 +18,7 @@ public class GameContext
     public BoomRepository boomRepository;
     public TileRepository tileRepository;
     public HeadRepository headRepository;
+    public FootRepository footRepository;
 
     public GameContext()
     {
@@ -33,6 +34,7 @@ public class GameContext
         boomRepository = new BoomRepository();
         tileRepository = new TileRepository();
         headRepository = new HeadRepository();
+        footRepository = new FootRepository();
     }
 
 }

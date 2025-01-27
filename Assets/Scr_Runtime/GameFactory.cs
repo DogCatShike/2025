@@ -87,4 +87,18 @@ public static class GameFactory
         entity.Ctor();
         return entity;
     }
+
+    public static FootEntity Foot_Create(GameContext ctx, Transform parent)
+    {
+        GameObject go = ctx.assetsCore.Entity_GetFoot();
+        go = GameObject.Instantiate(go, parent);
+
+        FootEntity entity = go.GetComponent<FootEntity>();
+
+        entity.idSig.entityType = EntityType.Foot;
+        entity.idSig.entityID = ctx.idService.footID++;
+
+        entity.Ctor();
+        return entity;
+    }
 }

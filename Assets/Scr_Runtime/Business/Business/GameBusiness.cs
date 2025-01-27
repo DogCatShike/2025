@@ -25,6 +25,9 @@ public static class GameBusiness
 
         HeadEntity headEntity = HeadDomain.Spawn(ctx, parent);
         HeadDomain.SetColor(headEntity, color);
+
+        FootEntity footEntity = FootDomain.Spawn(ctx, parent);
+        FootDomain.SetColor(footEntity, color);
     }
 
     public static void Tick(GameContext ctx, float dt)
@@ -58,6 +61,7 @@ public static class GameBusiness
     {
         int lenBoom = ctx.boomRepository.TakeAll(out BoomEntity[] booms);
         ctx.headRepository.TakeAll(out HeadEntity[] heads);
+        ctx.footRepository.TakeAll(out FootEntity[] foots);
 
         for(int i = 0; i < lenBoom; i++)
         {
@@ -66,6 +70,9 @@ public static class GameBusiness
 
             HeadEntity head = heads[i];
             head.gameObject.SetActive(false);
+
+            FootEntity foot = foots[i];
+            foot.gameObject.SetActive(false);
         }
     }
 
@@ -80,6 +87,7 @@ public static class GameBusiness
         ctx.tileRepository.TakeAll(out TileEntity[] tiles);
         ctx.boomRepository.TakeAll(out BoomEntity[] booms);
         ctx.headRepository.TakeAll(out HeadEntity[] heads);
+        ctx.footRepository.TakeAll(out FootEntity[] foots);
         ctx.audioRepository.TakeAll(out AudioEntity[] audios);
 
         for(int i = 0; i < length; i++)
@@ -90,6 +98,7 @@ public static class GameBusiness
             TileEntity tile = tiles[i];
             BoomEntity boom = booms[i];
             HeadEntity head = heads[i];
+            FootEntity foot = foots[i];
 
             #region 运行逻辑
             float size = parent.size;
@@ -136,6 +145,10 @@ public static class GameBusiness
                 {
                     bool isTileScale = HeadDomain.SetTileScale(head, dt);
 
+                    foot.gameObject.SetActive(true);
+                    FootDomain.SetPos(foot, head);
+                    FootDomain.Move(foot, dt);
+
                     if(isTileScale)
                     {
                         HeadDomain.SetHeadAlpha(head, dt);
@@ -145,7 +158,7 @@ public static class GameBusiness
                             head.gameObject.SetActive(false);
 
                             //写了tile后再改这里
-                            parent.gameObject.SetActive(false);
+                            // parent.gameObject.SetActive(false);
                         }
                     }
                 }
@@ -161,6 +174,7 @@ public static class GameBusiness
                 BoomDomain.TearDown(boom, ctx);
                 HeadDomain.TearDown(head, ctx);
                 ParentDomain.TearDown(parent, ctx);
+                FootDomain.TearDown(foot, ctx);
             }
             #endregion
         }
