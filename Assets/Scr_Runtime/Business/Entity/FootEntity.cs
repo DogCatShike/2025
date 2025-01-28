@@ -8,29 +8,38 @@ public class FootEntity : MonoBehaviour
     public IDSignature idSig;
 
     public GameObject[] foots;
-    public int[] maxCopy;
-    public int[] copyNumbers;
-    public float[] moveDist;
-    public float[] footYPos;
 
     public float moveSpeed;
+    public float[] moveDists;
+
+    public int[] maxCopys;
+    public int[] copyCounts;
+
+    bool[] isMoving;
+
+    public float alpha;
+
+    LineRenderer[] lineRenderers;
 
     public void Ctor()
     {
         foots = new GameObject[9];
-        maxCopy = new int[9];
-        copyNumbers = new int[9];
-        moveDist = new float[9];
-        footYPos = new float[9];
+
+        maxCopys = new int[9];
+        copyCounts = new int[9];
+        
         moveSpeed = 10;
+        moveDists = new float[9];
+
+        isMoving = new bool[9];
+
+        alpha = 0.8f;
+
+        lineRenderers = new LineRenderer[9];
 
         for (int i = 0; i < foots.Length; i++)
         {
             foots[i] = transform.Find("Foot" + (i+1)).gameObject;
-
-            maxCopy[i] = UnityEngine.Random.Range(2, 8);
-            copyNumbers[i] = 0;
-            moveDist[i] = 0;
         }
     }
 
@@ -47,76 +56,154 @@ public class FootEntity : MonoBehaviour
         }
     }
 
+    public void SetAlpha(float dt)
+    {
+        alpha -= dt * 1.2f;
+
+        for(int i = 0; i < foots.Length; i++)
+        {
+            GameObject foot = foots[i];
+
+            Renderer renderer = foot.GetComponent<Renderer>();
+            renderer.material.SetFloat("_Transparency", alpha);
+        }
+    }
+
     public void SetPos(HeadEntity head)
     {
         GameObject[] heads = head.heads;
 
         for (int i = 0; i < foots.Length; i++)
         {
-            int j = i / 2;
-            j = 6 - j;
-            foots[i].transform.position = heads[j].transform.position;
-
-            footYPos[i] = foots[i].transform.position.y;
-        }
-
-        foots[0].transform.position = (heads[7].transform.position + heads[6].transform.position) / 2;
-        footYPos[0] = foots[0].transform.position.y;
-    }
-
-    public void Move(float dt)
-    {
-        // for (int i = 0; i < foots.Length; i++)
-        // {
-        //     if (copyNumbers[i] < randomNumbers[i])
-        //     {
-        //         float y = transform.position.y;
-        //         float maxMove = Mathf.Lerp(5, 1, (randomNumbers[i] - 2) / 6);
-
-        //         if (y <= footYPos[i] - maxMove)
-        //         {
-        //             float randomX = UnityEngine.Random.Range(-1f, 1f);
-
-        //             Vector3 newPos = new Vector3(randomX * dt, moveSpeed * dt);
-        //             transform.position += newPos;
-        //         }
-        //         else
-        //         {
-        //             copyNumbers[i]++;
-        //             CopySelf();
-        //         }
-        //     }
-        // }
-
-        for (int i = 0; i < foots.Length; i++)
-        {
-            if (copyNumbers[i] < maxCopy[i])
+            if(foots[i].transform.localPosition == Vector3.zero)
             {
-                float maxMove = Mathf.Lerp(5, 1, (maxCopy[i] - 2) / 6);
+                int j = i / 2;
+                j = 6 - j;
+                foots[i].transform.position = heads[j].transform.position;
 
-                float randomX = UnityEngine.Random.Range(-1f, 1f);
-                foots[i].transform.position -= new Vector3(randomX * dt, moveSpeed * dt);
-                moveDist[i] += moveSpeed * dt;
-
-                if(moveDist[i] >= footYPos[i] - maxMove)
-                {
-                    CopySelf();
-                    moveDist[i] = 0;
-                }
+                foots[0].transform.position = (heads[7].transform.position + heads[6].transform.position) / 2;
             }
         }
     }
 
-    public void CopySelf()
+    public void SetMisc()
     {
-        GameObject foot = Instantiate(gameObject, transform.position, transform.rotation);
-        foot.GetComponent<FootEntity>().copyNumbers = (int[])copyNumbers.Clone();
-        
-        for (int i = 0; i < copyNumbers.Length; i++)
+        for (int i = 0; i < foots.Length; i++)
         {
-            copyNumbers[i]++;
+            maxCopys[i] = UnityEngine.Random.Range(2, 8);
+            copyCounts[i] = 0;
+            moveDists[i] = 0;
+            lineRenderers[i] = foots[i].GetComponent<LineRenderer>();
         }
     }
+
+    public void SetLine(Color color)
+    {
+        float hue, saturation, value;
+        Color.RGBToHSV(color, out hue, out saturation, out value);
+        Color lineColor = Color.HSVToRGB(hue, saturation, 0.7f);
+
+        for (int i = 0; i < lineRenderers.Length; i++)
+        {
+            LineRenderer lineRenderer = lineRenderers[i];
+
+            lineRenderer.positionCount = 0;
+            lineRenderer.startWidth = 0.1f;
+            lineRenderer.endWidth = 0.1f;
+            lineRenderer.material = new Material(Shader.Find("Standard"));
+            lineRenderer.material.SetFloat("_Mode", 3);
+            lineRenderer.material.color = lineColor;
+        }
+    }
+
+    #region Move
+    public void Move(float dt, float size)
+    {
+        for (int i = 0; i < foots.Length; i++)
+        {
+            GameObject foot = foots[i];
+
+            int maxCopy = maxCopys[i];
+            int copyCount = copyCounts[i];
+
+            float maxMove = Mathf.Lerp(3, 1, (maxCopy - 2) / 6f);
+
+            bool isStop = StopMove(i, maxMove, dt);
+
+            isMoving[i] = true;
+
+            LineRenderer line = lineRenderers[i];
+
+            if (copyCount >= maxCopy)
+            {
+                isMoving[i] = false;
+                continue;
+            }
+
+            if (!isStop)
+            {
+                StartMove(dt, foot, size, line);
+            }
+            else
+            {
+                if (copyCount < maxCopy)
+                {
+                    GameObject newFoot = CopySelf(i, foot);
+                    StartMove(dt, newFoot, size, line);
+                }
+                moveDists[i] = 0;
+            }
+        }
+    }
+
+    public void StartMove(float dt, GameObject foot, float size, LineRenderer line)
+    {
+        float randomX = UnityEngine.Random.Range(-10, 10);
+        float multiple = Mathf.Lerp(0, 1, size / 0.2f);
+        foot.transform.position += new Vector3(randomX, -moveSpeed / 3, 0) * dt * multiple;
+
+        DrawLine(line, foot.transform.position);
+    }
+
+    public bool StopMove(int i, float maxMove, float dt)
+    {
+        moveDists[i] += moveSpeed * dt;
+
+        if (moveDists[i] >= maxMove)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public GameObject CopySelf(int i, GameObject foot)
+    {
+        copyCounts[i]++;
+        GameObject newFoot = Instantiate(foot.gameObject, foot.transform.parent);
+        return newFoot;
+    }
+
+    public bool IsMoving()
+    {
+        foreach (bool isMove in isMoving)
+        {
+            if (isMove)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void DrawLine(LineRenderer line, Vector3 position)
+    {
+        line.positionCount++;
+        line.SetPosition(line.positionCount - 1, position);
+    }
+
+    #endregion
 
     public void TearDown()
     {

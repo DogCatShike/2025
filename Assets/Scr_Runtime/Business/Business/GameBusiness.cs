@@ -28,6 +28,8 @@ public static class GameBusiness
 
         FootEntity footEntity = FootDomain.Spawn(ctx, parent);
         FootDomain.SetColor(footEntity, color);
+        FootDomain.SetMisc(footEntity);
+        FootDomain.SetLine(footEntity, color);
     }
 
     public static void Tick(GameContext ctx, float dt)
@@ -146,19 +148,22 @@ public static class GameBusiness
                     bool isTileScale = HeadDomain.SetTileScale(head, dt);
 
                     foot.gameObject.SetActive(true);
+                    bool isMoving = FootDomain.IsMoving(foot);
                     FootDomain.SetPos(foot, head);
-                    FootDomain.Move(foot, dt);
+                    FootDomain.Move(foot, dt, size);
 
-                    if(isTileScale)
+                    if(isTileScale && !isMoving)
                     {
+                        Debug.Log("Done");
                         HeadDomain.SetHeadAlpha(head, dt);
+                        FootDomain.SetAlpha(foot, dt);
                         
                         if(head.alpha <= 0.1)
                         {
                             head.gameObject.SetActive(false);
+                            foot.gameObject.SetActive(false);
 
-                            //写了tile后再改这里
-                            // parent.gameObject.SetActive(false);
+                            parent.gameObject.SetActive(false);
                         }
                     }
                 }
