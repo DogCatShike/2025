@@ -96,7 +96,7 @@ public class FootEntity : MonoBehaviour
             copyCounts[i] = 0;
             moveDists[i] = 0;
             lineRenderers[i] = foots[i].GetComponent<LineRenderer>();
-            lineTimes[i] = 0;
+            lineTimes[i] = 0.1f;
         }
     }
 
