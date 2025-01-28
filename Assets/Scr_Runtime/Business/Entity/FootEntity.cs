@@ -20,6 +20,7 @@ public class FootEntity : MonoBehaviour
     public float alpha;
 
     LineRenderer[] lineRenderers;
+    float[] lineTimes;
 
     public void Ctor()
     {
@@ -36,6 +37,7 @@ public class FootEntity : MonoBehaviour
         alpha = 0.8f;
 
         lineRenderers = new LineRenderer[9];
+        lineTimes = new float[9];
 
         for (int i = 0; i < foots.Length; i++)
         {
@@ -94,6 +96,7 @@ public class FootEntity : MonoBehaviour
             copyCounts[i] = 0;
             moveDists[i] = 0;
             lineRenderers[i] = foots[i].GetComponent<LineRenderer>();
+            lineTimes[i] = 0;
         }
     }
 
@@ -142,27 +145,32 @@ public class FootEntity : MonoBehaviour
 
             if (!isStop)
             {
-                StartMove(dt, foot, size, line);
+                StartMove(dt, foot, size, line, i);
             }
             else
             {
                 if (copyCount < maxCopy)
                 {
                     GameObject newFoot = CopySelf(i, foot);
-                    StartMove(dt, newFoot, size, line);
+                    StartMove(dt, newFoot, size, line, i);
                 }
                 moveDists[i] = 0;
             }
         }
     }
 
-    public void StartMove(float dt, GameObject foot, float size, LineRenderer line)
+    public void StartMove(float dt, GameObject foot, float size, LineRenderer line, int i)
     {
         float randomX = UnityEngine.Random.Range(-10, 10);
         float multiple = Mathf.Lerp(0, 1, size / 0.2f);
         foot.transform.position += new Vector3(randomX, -moveSpeed / 3, 0) * dt * multiple;
 
-        DrawLine(line, foot.transform.position);
+        lineTimes[i] += dt;
+        if (lineTimes[i] >= 0.1f)
+        {
+            DrawLine(line, foot.transform.position);
+            lineTimes[i] = 0;
+        }
     }
 
     public bool StopMove(int i, float maxMove, float dt)
